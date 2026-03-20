@@ -20,18 +20,38 @@
     <link href="css/style.css" rel="stylesheet">
 
     <style>
+        /* ===== GLOBAL MOBILE FIX ===== */
         * { box-sizing: border-box; }
         body { overflow-x: hidden; }
         img { max-width: 100%; height: auto; }
 
-        @media (max-width: 767.98px) {
+        /* ===== DESKTOP: carousel image height fix ===== */
+        .carousel-img img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* ===== MOBILE FIXES ===== */
+        @media (max-width: 991.98px) {
             .display-1 { font-size: 2rem !important; }
-            .display-6 { font-size: 1.4rem !important; }
-            .carousel-img { text-align: center; margin-top: 20px; }
-            .carousel-img img { max-height: 300px; object-fit: cover; }
-            .about-img img { width: 100% !important; margin-bottom: 20px; }
-            .top-bar { padding: 10px 0; }
-            h3 { font-size: 1.2rem; }
+            .display-6 { font-size: 1.3rem !important; }
+            .carousel-img img {
+                height: 250px !important;
+                margin-top: 15px;
+            }
+            .about-img img {
+                width: 100% !important;
+                margin-bottom: 20px;
+            }
+            /* Navbar menu text only on mobile */
+            .mobile-menu-label { display: block; }
+        }
+
+        @media (min-width: 992px) {
+            /* Hide mobile menu label on desktop */
+            .mobile-menu-label { display: none !important; }
         }
     </style>
 </head>
@@ -96,19 +116,20 @@
     <div class="container-fluid bg-secondary px-0 wow fadeIn" data-wow-delay="0.1s">
         <div class="nav-bar">
             <nav class="navbar navbar-expand-lg bg-primary navbar-dark px-4 py-lg-0">
-                <h4 class="d-lg-none m-0 text-white">Menu</h4>
+                <!-- Only visible on mobile -->
+                <h4 class="mobile-menu-label m-0 text-white">Menu</h4>
                 <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav me-auto">
+                    <div class="navbar-nav me-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
                         <a href="about.html" class="nav-item nav-link">About</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servises</a>
                             <div class="dropdown-menu bg-light m-0">
                                 <a href="feature.html" class="dropdown-item">Vocational Training</a>
-                                <a href="testimonial.html" class="dropdown-item active">Speech and Language Therapy</a>
+                                <a href="testimonial.html" class="dropdown-item">Speech and Language Therapy</a>
                                 <a href="team.html" class="dropdown-item">Our Team</a>
                                 <a href="404.html" class="dropdown-item">404 Page</a>
                             </div>
@@ -129,6 +150,8 @@
     <!-- Carousel Start -->
     <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s">
         <div class="owl-carousel header-carousel py-5">
+
+            <!-- Slide 1 -->
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-12 col-lg-6">
@@ -144,6 +167,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Slide 2 -->
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-12 col-lg-6">
@@ -159,6 +184,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Carousel End -->
@@ -207,33 +233,31 @@
                         <div class="col-12 mb-4 wow fadeIn" data-wow-delay="0.2s">
                             <img class="img-fluid w-100" src="img/pexels-tara-winstead-8385742.jpg.jpeg" alt="Image">
                         </div>
-                        <p class="mb-3 wow fadeIn" data-wow-delay="0.3s">We provide support for children with:</p>
-                        <p class="mb-2 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Autism Spectrum Disorder (ASD)</p>
-                        <p class="mb-2 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>ADHD</p>
-                        <p class="mb-2 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Intellectual Disability</p>
-                        <p class="mb-2 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Speech Delay</p>
-                        <p class="mb-2 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Learning Disabilities (Dyslexia, Dysgraphia)</p>
-                        <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Behavioral Challenges</p>
+                        <p class="mb-3">We provide support for children with:</p>
+                        <p class="mb-2"><i class="fa fa-check text-primary me-2"></i>Autism Spectrum Disorder (ASD)</p>
+                        <p class="mb-2"><i class="fa fa-check text-primary me-2"></i>ADHD</p>
+                        <p class="mb-2"><i class="fa fa-check text-primary me-2"></i>Intellectual Disability</p>
+                        <p class="mb-2"><i class="fa fa-check text-primary me-2"></i>Speech Delay</p>
+                        <p class="mb-2"><i class="fa fa-check text-primary me-2"></i>Learning Disabilities (Dyslexia, Dysgraphia)</p>
+                        <p class="mb-4"><i class="fa fa-check text-primary me-2"></i>Behavioral Challenges</p>
 
                         <h1 class="display-6 mb-4 wow fadeIn" data-wow-delay="0.2s">Our Facilities</h1>
-                        <p class="mb-2 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle text-primary me-2"></i>Safe &amp; child friendly classrooms</p>
-                        <p class="mb-2 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle text-primary me-2"></i>Sensory-friendly learning environment</p>
-                        <p class="mb-2 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle text-primary me-2"></i>Therapy rooms</p>
-                        <p class="mb-2 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle text-primary me-2"></i>CCTV monitored campus</p>
-                        <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle text-primary me-2"></i>Trained special educators</p>
+                        <p class="mb-2"><i class="fa fa-circle text-primary me-2"></i>Safe &amp; child friendly classrooms</p>
+                        <p class="mb-2"><i class="fa fa-circle text-primary me-2"></i>Sensory-friendly learning environment</p>
+                        <p class="mb-2"><i class="fa fa-circle text-primary me-2"></i>Therapy rooms</p>
+                        <p class="mb-2"><i class="fa fa-circle text-primary me-2"></i>CCTV monitored campus</p>
+                        <p class="mb-4"><i class="fa fa-circle text-primary me-2"></i>Trained special educators</p>
 
                         <div class="row g-4 pt-2">
                             <div class="col-12 col-sm-6 wow fadeIn" data-wow-delay="0.4s">
-                                <div class="h-100">
-                                    <h3>Why Parents Trust Us</h3>
-                                    <p>We give Special care and attention to every child. We help them learn, grow, and feel confident.</p>
-                                    <p class="text-dark"><i class="fa fa-check text-primary me-2"></i>Certified Special Educators</p>
-                                    <p class="text-dark"><i class="fa fa-check text-primary me-2"></i>Individual Attention</p>
-                                    <p class="text-dark"><i class="fa fa-check text-primary me-2"></i>Parent counseling &amp; guidance</p>
-                                    <p class="text-dark"><i class="fa fa-check text-primary me-2"></i>Regular Progress Reports</p>
-                                    <p class="text-dark"><i class="fa fa-check text-primary me-2"></i>Affordable Fee Structure</p>
-                                    <p class="text-dark"><i class="fa fa-check text-primary me-2"></i>Loving &amp; Supportive Environment</p>
-                                </div>
+                                <h3>Why Parents Trust Us</h3>
+                                <p>We give Special care and attention to every child. We help them learn, grow, and feel confident.</p>
+                                <p><i class="fa fa-check text-primary me-2"></i>Certified Special Educators</p>
+                                <p><i class="fa fa-check text-primary me-2"></i>Individual Attention</p>
+                                <p><i class="fa fa-check text-primary me-2"></i>Parent counseling &amp; guidance</p>
+                                <p><i class="fa fa-check text-primary me-2"></i>Regular Progress Reports</p>
+                                <p><i class="fa fa-check text-primary me-2"></i>Affordable Fee Structure</p>
+                                <p><i class="fa fa-check text-primary me-2"></i>Loving &amp; Supportive Environment</p>
                             </div>
                         </div>
                     </div>
@@ -341,24 +365,12 @@
                 <div class="col-12 col-md-6 col-lg-3">
                     <h4 class="text-light mb-4">Gallery</h4>
                     <div class="row g-2">
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-1.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-2.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-3.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-4.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-5.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-6.jpg" alt="">
-                        </div>
+                        <div class="col-4"><img class="img-fluid w-100" src="img/gallery-1.jpg" alt=""></div>
+                        <div class="col-4"><img class="img-fluid w-100" src="img/gallery-2.jpg" alt=""></div>
+                        <div class="col-4"><img class="img-fluid w-100" src="img/gallery-3.jpg" alt=""></div>
+                        <div class="col-4"><img class="img-fluid w-100" src="img/gallery-4.jpg" alt=""></div>
+                        <div class="col-4"><img class="img-fluid w-100" src="img/gallery-5.jpg" alt=""></div>
+                        <div class="col-4"><img class="img-fluid w-100" src="img/gallery-6.jpg" alt=""></div>
                     </div>
                 </div>
             </div>
