@@ -30,11 +30,85 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- ===== MOBILE ONLY FIXES (does NOT affect desktop) ===== -->
     <style>
-        overflow-x: hidden;
-          max-width: 100%;
-        
-        </style>
+        /* Prevent horizontal scroll on all devices */
+        * { box-sizing: border-box; }
+        body { overflow-x: hidden; }
+
+        @media (max-width: 991.98px) {
+
+            /* --- GLOBAL --- */
+            img { max-width: 100% !important; height: auto !important; }
+
+            /* --- TOPBAR: center logo on mobile --- */
+            .top-bar .col-lg-4 {
+                width: 100%;
+                text-align: center;
+                padding: 12px 0;
+            }
+            .top-bar img {
+                max-height: 65px;
+                width: auto !important;
+            }
+
+            /* --- NAVBAR: show Menu text properly --- */
+            .navbar { flex-wrap: wrap; }
+
+            /* --- CAROUSEL: fix huge heading & image overflow --- */
+            .display-1 { font-size: 1.8rem !important; }
+            .owl-carousel .container { padding-left: 15px !important; padding-right: 15px !important; }
+            .carousel-img img {
+                width: 100% !important;
+                max-height: 260px;
+                object-fit: cover;
+                margin-top: 15px;
+            }
+
+            /* --- CTA BAR: fix col-lg-11 not filling mobile --- */
+            .container-fluid.bg-primary .col-lg-11 {
+                width: 100% !important;
+            }
+            .container-fluid.bg-primary h3 {
+                font-size: 1.1rem;
+            }
+
+            /* --- ABOUT SECTION --- */
+            /* col-lg-6 about image: make full width on mobile */
+            .arrange .col-lg-6 {
+                width: 100% !important;
+            }
+            /* col-lg-10 content: fix overflow on mobile */
+            .arrange .col-lg-10 {
+                width: 100% !important;
+            }
+            /* Who We Support image inside col-lg-6 */
+            .arrange .about-img img {
+                width: 100% !important;
+                margin-bottom: 15px;
+            }
+            .display-6 { font-size: 1.3rem !important; }
+
+            /* --- TEAM: stack cards on mobile --- */
+            .col-md-6.col-lg-4 { width: 100% !important; }
+
+            /* --- NEWSLETTER --- */
+            .col-lg-7 { width: 100% !important; padding: 0 15px; }
+
+            /* --- FOOTER: stack columns on mobile --- */
+            .footer .col-lg-3 { width: 100% !important; }
+            .footer .col-md-6 { width: 100% !important; }
+        }
+
+        /* Small phones (under 480px) */
+        @media (max-width: 479.98px) {
+            .display-1 { font-size: 1.5rem !important; }
+            .display-6 { font-size: 1.15rem !important; }
+            .carousel-img img { max-height: 200px; }
+            .btn-play { transform: scale(0.85); }
+        }
+    </style>
+    <!-- ===== END MOBILE FIXES ===== -->
 </head>
 
 <body>
@@ -73,7 +147,7 @@
                             </div>
                             <div class="ms-2">
                                 <h6 class="text-primary mb-0">Mail Us</h6>
-                                <span class="text-white">info@domain.com</span>
+                                <span class="text-white"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="563f3830391632393b373f387835393b">[email&#160;protected]</a></span>
                             </div>
                         </div>
                     </div>
@@ -341,7 +415,7 @@
                      <p class="mb-2"><i class="bi bi-geo-fill"></i></i>Loacted in salem</p>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>1Sambandarstreet, Fairlands, Sinthampalayam, Salem-636016, Tamil Nadu</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f666169604f6a776e627f636a216c6062">[email&#160;protected]</a></p>
                     <div class="d-flex pt-3">
                         <a class="btn btn-square btn-primary me-2" href=""><i class="fab fa-x-twitter"></i></a>
                         <a class="btn btn-square btn-primary me-2" href=""><i class="fab fa-facebook-f"></i></a>
@@ -410,16 +484,6 @@
 
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-</body>
-
-</html>
+    <script src="lib/wow/wow.min.js"
