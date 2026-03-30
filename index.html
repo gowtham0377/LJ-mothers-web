@@ -1,497 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Lj-Mothers</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LJ Mothers Lap - Special School for Unique Minds</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --yellow: #F4A807;
+      --dark-green: #1A3C34;
+      --teal: #2D6A4F;
+      --light-bg: #F9F5EE;
+      --text-dark: #1a1a1a;
+      --text-gray: #555;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; color: var(--text-dark); background: #fff; overflow-x: hidden; }
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    /* ════ SCROLL REVEAL ════ */
+    .reveal {
+      opacity: 0; transform: translateY(50px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.from-left  { transform: translateX(-60px) translateY(0); }
+    .reveal.from-right { transform: translateX(60px) translateY(0); }
+    .reveal.from-top   { transform: translateY(-40px); }
+    .reveal.scale-in   { transform: scale(.88); opacity:0; }
+    .reveal.visible    { opacity:1; transform:translate(0) scale(1); }
+    .stagger > * { opacity:0; transform:translateY(36px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
+    .stagger.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:.05s;}
+    .stagger.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.15s;}
+    .stagger.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.25s;}
+    .stagger.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.35s;}
+    .stagger.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:.45s;}
+    .stagger.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.55s;}
+    .stagger.visible > *:nth-child(7){opacity:1;transform:none;transition-delay:.65s;}
+.stagger.visible > *:nth-child(8){opacity:1;transform:none;transition-delay:.75s;}
+.stagger.visible > *:nth-child(9){opacity:1;transform:none;transition-delay:.85s;}
+.stagger.visible > *:nth-child(10){opacity:1;transform:none;transition-delay:.95s;}
+.stagger.visible > *:nth-child(11){opacity:1;transform:none;transition-delay:1.05s;}
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600;700&family=Open+Sans&display=swap" rel="stylesheet">
+    /* ════ TOP BAR ════ */
+    .topbar { background:var(--dark-green); color:#fff; padding:10px 0; }
+    .topbar-inner { max-width:1200px; margin:auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+    .topbar-logo img { height:52px; object-fit:contain; transition:transform .4s; }
+    .topbar-logo img:hover { transform:scale(1.07) rotate(-2deg); }
+    .topbar-contacts { display:flex; gap:30px; flex-wrap:wrap; }
+    .topbar-contacts .item { display:flex; align-items:center; gap:10px; font-size:13px; cursor:default; }
+    .topbar-contacts .icon-box {
+      background:var(--yellow); color:var(--dark-green); width:34px; height:34px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;
+      transition:transform .3s, box-shadow .3s;
+    }
+    .topbar-contacts .item:hover .icon-box { transform:scale(1.2) rotate(10deg); box-shadow:0 4px 14px rgba(255, 255, 255, 0.5); }
+    .topbar-contacts .label { font-size:11px; opacity:.7; text-transform:uppercase; letter-spacing:.5px; }
+    .topbar-contacts .value { font-weight:700; font-size:13px; }
 
-    <!-- Icon Font Stylesheet -->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    /* ════ NAVBAR ════ */
+    .navbar {background:#1a73e8;; position:sticky; top:0; z-index:999; box-shadow:0 2px 12px rgba(0,0,0,.15); transition:box-shadow .3s; }
+    .navbar.scrolled { box-shadow:0 4px 28px rgba(0,0,0,.22); }
+    .navbar-inner { max-width:1200px; margin:auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-links { display:flex; list-style:none; gap:4px; }
+    .nav-links a {
+      display:block; padding:16px 20px; text-decoration:none; color:var(--dark-green);
+      font-weight:800; font-size:14px; text-transform:uppercase; letter-spacing:.5px;
+      transition:background .25s, color .25s, letter-spacing .2s; border-radius:4px; position:relative; overflow:hidden;
+    }
+    .nav-links a::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:0; height:3px; background:var(--dark-green); border-radius:2px; transition:width .3s; }
+    .nav-links a:hover::after, .nav-links a.active::after { width:55%; }
+    .nav-links a:hover, .nav-links a.active { background:var(--dark-green);  color:#ffffff;; letter-spacing:.9px; }
+    .nav-socials { display:flex; gap:8px; }
+    .nav-socials a {
+      width:32px; height:32px; background:var(--dark-green); color:#fff; border-radius:4px;
+      display:flex; align-items:center; justify-content:center; font-size:13px; text-decoration:none;
+      transition:background .2s, transform .25s, box-shadow .25s;
+    }
+    .nav-socials a:hover { background:#0f2820; transform:translateY(-4px) scale(1.12); box-shadow:0 6px 16px rgba(0,0,0,.25); }
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    /* ════ CAROUSEL ════ */
+    .carousel { position:relative; overflow:hidden; background:var(--light-bg); min-height:520px; }
+    .carousel-slides { display:flex; transition:transform .65s cubic-bezier(.77,0,.175,1); }
+    .slide { min-width:100%; display:flex; align-items:center; padding:60px 0; background:var(--light-bg); }
+    .slide-inner { max-width:1200px; margin:auto; padding:0 40px; display:flex; align-items:center; gap:60px; width:100%; }
+    .slide-text { flex:1; }
+    .slide-text h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,3.6rem); font-weight:800; color:var(--text-dark); line-height:1.1; margin-bottom:18px; }
+    .slide-text p { font-size:16px; color:var(--text-gray); max-width:480px; line-height:1.7; margin-bottom:30px; }
+    .slide-btns { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn-primary {
+      background:var(--yellow); color:var(--dark-green); padding:12px 28px; border:none;
+      border-radius:4px; font-weight:800; font-size:14px; text-transform:uppercase; cursor:pointer;
+      text-decoration:none; display:inline-block; position:relative; overflow:hidden;
+      transition:background .25s, transform .25s, box-shadow .25s, letter-spacing .2s;
+    }
+    .btn-primary::before { content:''; position:absolute; inset:0; background:rgba(255,255,255,.2); transform:translateX(-110%) skewX(-20deg); transition:transform .45s; }
+    .btn-primary:hover::before { transform:translateX(110%) skewX(-20deg); }
+    .btn-primary:hover { background:#e09500; transform:translateY(-3px); box-shadow:0 8px 24px rgba(244,168,7,.4); }
+    .btn-outline {
+      background:transparent; color:var(--dark-green); padding:11px 28px; border:2px solid var(--dark-green);
+      border-radius:4px; font-weight:800; font-size:14px; text-transform:uppercase; cursor:pointer;
+      text-decoration:none; display:inline-block;
+      transition:background .25s, color .25s, transform .25s, box-shadow .25s;
+    }
+    .btn-outline:hover { background:var(--dark-green); color:#fff; transform:translateY(-3px); box-shadow:0 8px 24px rgba(26,60,52,.3); }
+    .slide-img { flex:0 0 420px; }
+    .slide-img img {
+      width:100%; height:360px; object-fit:cover; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,.15);
+      transition:transform .5s, box-shadow .5s;
+    }
+    .slide-img img:hover { transform:scale(1.04) rotate(.8deg); box-shadow:0 20px 60px rgba(0,0,0,.22); }
+    .carousel-arrow {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:var(--yellow); color:var(--dark-green); border:none;
+      width:42px; height:42px; border-radius:4px; cursor:pointer; font-size:20px; font-weight:900;
+      display:flex; align-items:center; justify-content:center; z-index:10;
+      transition:background .2s, transform .2s, box-shadow .2s;
+    }
+    .carousel-arrow:hover { background:#e09500; transform:translateY(-50%) scale(1.16); box-shadow:0 6px 18px rgba(0,0,0,.2); }
+    .carousel-arrow.left { left:12px; }
+    .carousel-arrow.right { right:12px; }
+    .carousel-dots { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); display:flex; gap:8px; }
+    .dot { height:10px; border-radius:10px; background:#ccc; cursor:pointer; transition:background .3s, width .35s, transform .2s; width:10px; }
+    .dot:hover { transform:scale(1.3); }
+    .dot.active { background:var(--yellow); width:28px; }
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    /* ════ COMMON ════ */
+    section { padding:80px 0; }
+    .container { max-width:1200px; margin:auto; padding:0 20px; }
+    .section-tag { font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:2px; color:var(--yellow); display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .section-tag::before { content:''; display:inline-block; width:36px; height:3px; background:var(--yellow); border-radius:2px; }
+    .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:700; color:var(--text-dark); line-height:1.25; margin-bottom:18px; }
 
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    /* ════ ABOUT ════ */
+    #about { background:#fff; }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .about-img-wrap { position:relative; overflow:hidden; border-radius:12px; }
+    .about-img-wrap::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(244,168,7,.15) 0%,transparent 60%); opacity:0; transition:opacity .4s; border-radius:12px; pointer-events:none; }
+    .about-img-wrap:hover::after { opacity:1; }
+    .about-img-wrap img { width:100%; height:420px; object-fit:cover; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,.12); transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .4s; display:block; }
+    .about-img-wrap:hover img { transform:scale(1.05); box-shadow:0 22px 60px rgba(0,0,0,.2); }
+    .about-text p { color:var(--text-gray); line-height:1.8; font-size:15px; margin-bottom:18px; }
+    .about-quote { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--dark-green); border-left:4px solid var(--yellow); padding-left:18px; margin:24px 0; line-height:1.5; transition:border-color .3s,padding-left .3s; cursor:default; }
+    .about-quote:hover { border-color:var(--teal); padding-left:28px; }
+    .about-mission-box { background:var(--dark-green); color:#fff; border-radius:10px; padding:22px; margin-top:20px; transition:transform .3s,box-shadow .3s; cursor:default; }
+    .about-mission-box:hover { transform:translateY(-5px); box-shadow:0 14px 40px rgba(26,60,52,.35); }
+    .about-mission-box p { font-size:14px; line-height:1.7; color:rgba(255,255,255,.85); }
+    .who-list { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0; }
+    .who-list li { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:700; color:var(--text-dark); padding:6px 10px; border-radius:6px; transition:background .2s,transform .2s; cursor:default; }
+    .who-list li:hover { background:var(--light-bg); transform:translateX(7px); }
+    .who-list li::before { content:'✓'; background:var(--yellow); color:var(--dark-green); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; flex-shrink:0; transition:transform .4s,background .3s; }
+    .who-list li:hover::before { transform:rotate(360deg) scale(1.2); background:var(--teal); }
 
-    <!-- ===== MOBILE ONLY FIXES (does NOT affect desktop) ===== -->
-    <style>
-        /* Prevent horizontal scroll on all devices */
-        * { box-sizing: border-box; }
-        body { overflow-x: hidden; }
+    /* ════ SERVICES ════ */
+    #services { background:#fff; padding-top:0; }
+    .care-grid { display:grid; grid-template-columns:280px 1fr; border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,.1); transition:box-shadow .4s; }
+    .care-grid:hover { box-shadow:0 18px 60px rgba(0,0,0,.16); }
+    .care-label-box { background:var(--light-bg); padding:40px 30px; display:flex; flex-direction:column; justify-content:center; }
+    .care-label-box h2 { font-family:'Playfair Display',serif; font-size:2rem; font-weight:800; color:var(--dark-green); text-transform:uppercase; line-height:1.1; margin-bottom:16px; }
+    .care-label-box p { font-size:13px; color:var(--text-gray); line-height:1.7; }
+    .care-services-grid { display:grid; grid-template-columns:repeat(3,1fr); }
+    .care-card { padding:30px 24px; border-left:1px solid #eee; border-bottom:1px solid #eee; position:relative; overflow:hidden; cursor:default; transition:background .3s,transform .3s,box-shadow .3s; }
+    .care-card::before { content:''; position:absolute; bottom:0; left:0; width:0; height:3px; background:var(--yellow); transition:width .4s; }
+    .care-card:hover::before { width:100%; }
+    .care-card:hover { background:var(--light-bg); transform:translateY(-5px); box-shadow:0 10px 30px rgba(0,0,0,.09); }
+    .care-icon { width:48px; height:48px; background:var(--yellow); color:var(--dark-green); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:14px; transition:transform .4s,background .3s,box-shadow .3s; }
+    .care-card:hover .care-icon { transform:rotate(15deg) scale(1.18); background:var(--dark-green); color:var(--yellow); box-shadow:0 6px 20px rgba(26,60,52,.3); }
+    .care-card h4 { font-size:15px; font-weight:800; color:var(--dark-green); margin-bottom:8px; transition:color .2s; }
+    .care-card:hover h4 { color:var(--teal); }
+    .care-card p { font-size:13px; color:var(--text-gray); line-height:1.6; margin-bottom:12px; }
+    .read-more { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--yellow); text-decoration:none; display:flex; align-items:center; gap:6px; border-top:2px solid var(--yellow); padding-top:10px; width:fit-content; transition:gap .2s,color .2s,letter-spacing .2s; }
+    .read-more:hover { gap:14px; color:var(--dark-green); letter-spacing:2px; }
 
-        @media (max-width: 991.98px) {
+    /* ════ WHY US ════ */
+    #whyus { background:#fff; padding:80px 0; }
+    .whyus-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:stretch; }
+    .stats-grid { display:grid; grid-template-columns:1fr 1fr; border-radius:12px; overflow:hidden; }
+    .stat-box { padding:40px 30px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; cursor:default; transition:transform .3s; position:relative; overflow:hidden; }
+    .stat-box::after { content:''; position:absolute; inset:0; background:rgba(255,255,255,.07); transform:translateY(100%); transition:transform .4s; }
+    .stat-box:hover::after { transform:translateY(0); }
+    .stat-box:hover { transform:scale(1.05); z-index:2; }
+    .stat-box:nth-child(1){background:var(--light-bg);}
+    .stat-box:nth-child(2){background:var(--dark-green);color:#fff;}
+    .stat-box:nth-child(3){background:var(--yellow);}
+    .stat-box:nth-child(4){background:var(--teal);color:#fff;}
+    .stat-icon { font-size:32px; margin-bottom:12px; transition:transform .4s; }
+    .stat-box:hover .stat-icon { transform:scale(1.35) rotate(-12deg); }
+    .stat-box:nth-child(1) .stat-icon{color:var(--dark-green);}
+    .stat-box:nth-child(2) .stat-icon{color:var(--yellow);}
+    .stat-box:nth-child(3) .stat-icon{color:var(--dark-green);}
+    .stat-box:nth-child(4) .stat-icon{color:var(--yellow);}
+    .stat-number { font-family:'Playfair Display',serif; font-size:3rem; font-weight:800; line-height:1; margin-bottom:6px; }
+    .stat-box:nth-child(1) .stat-number{color:var(--dark-green);}
+    .stat-box:nth-child(3) .stat-number{color:var(--dark-green);}
+    .stat-label { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px; opacity:.85; }
+    .whyus-text { padding-left:20px; }
+    .whyus-text p { color:var(--text-gray); font-size:15px; line-height:1.8; margin-bottom:24px; }
+    .whyus-list { list-style:none; margin-bottom:30px; }
+    .whyus-list li { display:flex; align-items:flex-start; gap:12px; font-size:14px; color:var(--text-dark); margin-bottom:10px; padding:8px 12px; border-radius:8px; transition:background .2s,transform .2s; cursor:default; }
+    .whyus-list li:hover { background:var(--light-bg); transform:translateX(8px); }
+    .whyus-list li::before { content:'✓'; background:var(--yellow); color:var(--dark-green); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; flex-shrink:0; margin-top:1px; transition:transform .4s; }
+    .whyus-list li:hover::before { transform:rotate(360deg) scale(1.2); }
+    .whyus-btns { display:flex; gap:12px; flex-wrap:wrap; }
 
-            /* --- GLOBAL --- */
-            img { max-width: 100% !important; height: auto !important; }
+    /* ════ TEAM ════ */
+    #team { background:var(--light-bg); }
+    .team-header { text-align:center; margin-bottom:50px; }
+    .team-grid { display:flex; justify-content:center; gap:30px; flex-wrap:wrap; }
+    .team-card { background:#fff; border-radius:12px; overflow:hidden; width:260px; box-shadow:0 4px 20px rgba(0,0,0,.08); cursor:default; transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s; }
+    .team-card:hover { transform:translateY(-12px) scale(1.02); box-shadow:0 22px 55px rgba(0,0,0,.17); }
+    .team-img { width:100%; height:200px; background:linear-gradient(135deg,var(--light-bg),#e8dfc8); display:flex; align-items:center; justify-content:center; font-size:64px; color:var(--dark-green); position:relative; overflow:hidden; transition:background .4s; }
+    .team-card:hover .team-img { background:linear-gradient(135deg,var(--dark-green),var(--teal)); }
+    .team-img i { transition:transform .4s,color .4s; }
+    .team-card:hover .team-img i { transform:scale(1.18); color:var(--yellow); }
+    .team-info { padding:20px; }
+    .team-info h4 { font-size:16px; font-weight:800; color:var(--dark-green); margin-bottom:4px; transition:color .2s; }
+    .team-card:hover .team-info h4 { color:var(--teal); }
+    .team-info span { font-size:13px; color:var(--text-gray); display:block; margin-bottom:14px; }
+    .team-socials { display:flex; gap:8px; }
+    .team-socials a { width:30px; height:30px; background:var(--dark-green); color:#fff; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:12px; text-decoration:none; transition:background .2s,transform .25s,box-shadow .25s; }
+    .team-socials a:hover { background:var(--yellow); color:var(--dark-green); transform:translateY(-5px) scale(1.15); box-shadow:0 6px 16px rgba(244,168,7,.4); }
 
-            /* --- TOPBAR: center logo on mobile --- */
-            .top-bar .col-lg-4 {
-                width: 100%;
-                text-align: center;
-                padding: 12px 0;
-            }
-            .top-bar img {
-                max-height: 65px;
-                width: auto !important;
-            }
+    /* ════ NEWSLETTER ════ */
+    .newsletter { background:#fff; padding:70px 0; text-align:center; }
+    .newsletter h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; margin-bottom:10px; transition:color .3s; }
+    .newsletter:hover h2 { color:var(--teal); }
+    .newsletter p { color:var(--text-gray); font-size:14px; margin-bottom:28px; }
+    .newsletter-form { display:flex; justify-content:center; max-width:480px; margin:auto; }
+    .newsletter-form input { flex:1; padding:14px 20px; border:2px solid #ddd; border-right:none; border-radius:4px 0 0 4px; font-size:14px; font-family:'Nunito',sans-serif; outline:none; transition:border-color .25s; }
+    .newsletter-form input:focus { border-color:var(--yellow); }
+    .newsletter-form button { background:var(--yellow); color:var(--dark-green); border:none; padding:14px 20px; border-radius:0 4px 4px 0; cursor:pointer; font-size:16px; transition:background .2s,transform .2s; }
+    .newsletter-form button:hover { background:#e09500; transform:scale(1.1); }
 
-            /* --- NAVBAR: show Menu text properly --- */
-            .navbar { flex-wrap: wrap; }
+    /* ════ FOOTER ════ */
+    footer { background:var(--dark-green); color:#fff; padding:60px 0 0; }
+    .footer-grid { display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:40px; margin-bottom:50px; }
+    .footer-col h5 { font-size:15px; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px; color:var(--yellow); position:relative; padding-bottom:10px; }
+    .footer-col h5::after { content:''; position:absolute; bottom:0; left:0; width:36px; height:2px; background:var(--yellow); border-radius:2px; transition:width .35s; }
+    .footer-col:hover h5::after { width:72px; }
+    .footer-col p,.footer-col li,.footer-col a { font-size:13px; color:rgba(255,255,255,.75); line-height:1.8; }
+    .footer-col ul { list-style:none; }
+    .footer-col a { text-decoration:none; display:inline-block; transition:color .2s,padding-left .2s; }
+    .footer-col a:hover { color:var(--yellow); padding-left:6px; }
+    .footer-contact-item { display:flex; gap:10px; margin-bottom:10px; font-size:13px; color:rgba(255,255,255,.75); cursor:default; transition:color .2s; }
+    .footer-contact-item:hover { color:#fff; }
+    .footer-contact-item i { color:var(--yellow); margin-top:3px; transition:transform .3s; }
+    .footer-contact-item:hover i { transform:scale(1.3) rotate(12deg); }
+    .footer-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+    .footer-gallery img { width:100%; height:60px; object-fit:cover; border-radius:4px; filter:brightness(.75); transition:filter .3s,transform .35s,box-shadow .3s; cursor:pointer; position:relative; z-index:0; }
+    .footer-gallery img:hover { filter:brightness(1.1); transform:scale(1.1); box-shadow:0 6px 18px rgba(0,0,0,.45); z-index:2; }
+    .footer-hours li { margin-bottom:8px; transition:padding-left .2s; cursor:default; }
+    .footer-hours li:hover { padding-left:7px; }
+    .footer-hours .day { font-weight:700; color:#fff; font-size:12px; }
+    .footer-hours .time { font-size:12px; color:var(--yellow); }
+    .footer-socials { display:flex; gap:8px; margin-top:16px; }
+    .footer-socials a { width:34px; height:34px; background:rgba(255,255,255,.1); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:14px; text-decoration:none; color:#fff; transition:background .2s,transform .25s,box-shadow .25s; }
+    .footer-socials a:hover { background:var(--yellow); color:var(--dark-green); transform:translateY(-5px) rotate(8deg); box-shadow:0 8px 20px rgba(244,168,7,.4); }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,.1); padding:20px; display:flex; justify-content:space-between; align-items:center; font-size:13px; color:rgba(255,255,255,.6); }
 
-            /* --- CAROUSEL: fix huge heading & image overflow --- */
-            .display-1 { font-size: 1.8rem !important; }
-            .owl-carousel .container { padding-left: 15px !important; padding-right: 15px !important; }
-            .carousel-img img {
-                width: 100% !important;
-                max-height: 260px;
-                object-fit: cover;
-                margin-top: 15px;
-            }
+    /* ════ BACK TO TOP ════ */
+    #backTop { position:fixed; bottom:24px; right:24px; background:var(--yellow); color:var(--dark-green); width:44px; height:44px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:900; cursor:pointer; text-decoration:none; box-shadow:0 4px 16px rgba(0,0,0,.2); opacity:0; pointer-events:none; transition:opacity .3s,transform .3s,box-shadow .3s; z-index:9999; }
+    #backTop.show { opacity:1; pointer-events:auto; }
+    #backTop:hover { transform:translateY(-6px) scale(1.12); box-shadow:0 12px 30px rgba(244,168,7,.5); }
 
-            /* --- CTA BAR: fix col-lg-11 not filling mobile --- */
-            .container-fluid.bg-primary .col-lg-11 {
-                width: 100% !important;
-            }
-            .container-fluid.bg-primary h3 {
-                font-size: 1.1rem;
-            }
+    /* ════ RESPONSIVE ════ */
+    @media(max-width:900px){
+      .about-grid,.whyus-grid{grid-template-columns:1fr;}
+      .care-grid{grid-template-columns:1fr;}
+      .care-services-grid{grid-template-columns:1fr 1fr;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+      .slide-inner{flex-direction:column;gap:30px;}
+      .slide-img{flex:unset;width:100%;}
+    }
+    @media(max-width:600px){
+      .care-services-grid{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr;}
+      .stats-grid{grid-template-columns:1fr 1fr;}
+      .nav-links a{padding:14px 12px;font-size:12px;}
+    }
 
-            /* --- ABOUT SECTION --- */
-            /* col-lg-6 about image: make full width on mobile */
-            .arrange .col-lg-6 {
-                width: 100% !important;
-            }
-            /* col-lg-10 content: fix overflow on mobile */
-            .arrange .col-lg-10 {
-                width: 100% !important;
-            }
-            /* Who We Support image inside col-lg-6 */
-            .arrange .about-img img {
-                width: 100% !important;
-                margin-bottom: 15px;
-            }
-            .display-6 { font-size: 1.3rem !important; }
-
-            /* --- TEAM: stack cards on mobile --- */
-            .col-md-6.col-lg-4 { width: 100% !important; }
-
-            /* --- NEWSLETTER --- */
-            .col-lg-7 { width: 100% !important; padding: 0 15px; }
-
-            /* --- FOOTER: stack columns on mobile --- */
-            .footer .col-lg-3 { width: 100% !important; }
-            .footer .col-md-6 { width: 100% !important; }
-        }
-
-        /* Small phones (under 480px) */
-        @media (max-width: 479.98px) {
-            .display-1 { font-size: 1.5rem !important; }
-            .display-6 { font-size: 1.15rem !important; }
-            .carousel-img img { max-height: 200px; }
-            .btn-play { transform: scale(0.85); }
-        }
-    </style>
-    <!-- ===== END MOBILE FIXES ===== -->
+    .care-extra {
+  display: none;
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: var(--text-gray);
+  line-height: 1.7;
+  border-top: 2px solid var(--yellow);
+  padding-top: 10px;
+}
+.care-card.expanded .care-extra {
+  display: block;
+}
+.care-card.expanded {
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0,0,0,.1);
+}
+  </style>
 </head>
-
 <body>
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-logo">
+      <img src="https://gowtham0377.github.io/LJ-mothers-web/img/LJ Logo White.png" alt="LJ Mothers Lap"/>
     </div>
-    <!-- Spinner End -->
-
-
-    <!-- Topbar Start -->
-    <div class="container-fluid bg-secondary top-bar wow fadeIn" data-wow-delay="0.1s">
-        <div class="row align-items-center h-100">
-            <div class="col-lg-4 text-center text-lg-start">
-                <a href="index.html">
-                    <img class="text" class="img-fluid w-100" src="img/LJ Logo White.png" alt="Image">
-                </a>
-            </div>
-            <div class="col-lg-8 d-none d-lg-block">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="d-flex justify-content-end">
-                            <div class="flex-shrink-0 btn-square bg-primary">
-                                <i class="fa fa-phone-alt text-dark"></i>
-                            </div>
-                            <div class="ms-2">
-                                <h6 class="text-primary mb-0">Call Us</h6>
-                                <span class="text-white">+012 345 6789</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="d-flex justify-content-end">
-                            <div class="flex-shrink-0 btn-square bg-primary">
-                                <i class="fa fa-envelope-open text-dark"></i>
-                            </div>
-                            <div class="ms-2">
-                                <h6 class="text-primary mb-0">Mail Us</h6>
-                                <span class="text-white"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="563f3830391632393b373f387835393b">[email&#160;protected]</a></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="d-flex justify-content-end">
-                            <div class="flex-shrink-0 btn-square bg-primary">
-                                <i class="fa fa-map-marker-alt text-dark"></i>
-                            </div>
-                            <div class="ms-2">
-                                <h6 class="text-primary mb-0">Address</h6>
-                                <span class="text-white">Sambandarstreet, Fairlands, Sinthampalayam, Salem-636016, Tamil Nadu</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="topbar-contacts">
+      <div class="item"><div class="icon-box"><i class="fas fa-phone"></i></div><div><div class="label">Call Us</div><div class="value">+012 345 6789</div></div></div>
+      <div class="item"><div class="icon-box"><i class="fas fa-envelope"></i></div><div><div class="label">Mail Us</div><div class="value">info@ljmothers.com</div></div></div>
+      <div class="item"><div class="icon-box"><i class="fas fa-map-marker-alt"></i></div><div><div class="label">Address</div><div class="value">Fairlands, Salem - 636016</div></div></div>
     </div>
-    <!-- Topbar End -->
-
-
-    <!-- Navbar Start -->
-    <div class="container-fluid bg-secondary px-0 wow fadeIn" data-wow-delay="0.1s">
-        <div class="nav-bar">
-            <nav class="navbar navbar-expand-lg bg-primary navbar-dark px-4 py-lg-0">
-                <h4 class="d-lg-none m-0">Menu</h4>
-                <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav me-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servises</a>
-                            <div class="dropdown-menu bg-light m-0">
-                                <a href="feature.html" class="dropdown-item">Vocational Training</a>
-                                <a href="testimonial.html" class="dropdown-item active">Speech and Language Therapy</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                    <div class="d-none d-lg-flex ms-auto">
-                        <a class="btn btn-square btn-dark ms-2" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-dark ms-2" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-dark ms-2" href=""><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- Navbar End -->
-
-
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s">
-        <div class="owl-carousel header-carousel py-5">
-            <div class="container py-5">
-                <div class="row g-5 align-items-center">
-                    <div class="col-12 col-lg-6">
-                        <div class="carousel-text">
-                            <h1 class="display-1 text-uppercase mb-3">Beyond disabilities</h1>
-                            <p class="fs-5 mb-5">Disability does not limit potential,At Ljmothers every child has unique strengths waiting to shine</p>
-                            
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <div class="carousel-img">
-                            <img class="w-100" src="img/image1.jpg" alt="Image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container py-5">
-                <div class="row g-5 align-items-center">
-                    <div class="col-12 col-lg-6">
-                        <div class="carousel-text">
-                            <h1 class="display-1 text-uppercase mb-3">Individualized Curriculum</h1>
-                            <p class="fs-5 mb-5">Focuses on adaptive skills (personal care, communication), functional academics (basic literacy/math), and social skills.</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <div class="carousel-img">
-                            <img class="w-100" src="img/image2.png" alt="Image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Carousel End -->
-
-
-
-    <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container">
-        <div class="row g-0">
-            <div class="col-lg-11">
-                <div class="h-100 py-5 d-flex align-items-center">
-
-                    <!-- Instagram Direct Link -->
-                    <a href="https://www.instagram.com/lj_mothers_lap_special_school/reel/DUiV-84D-_r/" target="_blank">
-                        <button type="button" class="btn-play">
-                            <span></span>
-                        </button>
-                    </a>
-
-                    <h3 class="ms-5 mb-0">
-                        click here
-                    </h3>
-                </div>
-            </div>
-
-            <div class="d-none d-lg-block col-lg-1">
-                <div class="h-100 w-100 bg-secondary d-flex align-items-center justify-content-center">
-                    <span class="text-white" style="transform: rotate(-90deg);">Scroll Down</span>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
-    
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-socials">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</nav>
+
+<!-- CAROUSEL -->
+<section id="home" class="carousel">
+  <div class="carousel-slides" id="slides">
+    <div class="slide"><div class="slide-inner"><div class="slide-text"><h1>Beyond Disabilities</h1><p>Disability does not limit potential. At LJ Mothers, every child has unique strengths waiting to shine.</p><div class="slide-btns"><a href="#services" class="btn-primary">Our Services</a><a href="#about" class="btn-outline">Learn More</a></div></div><div class="slide-img"><img src="https://gowtham0377.github.io/LJ-mothers-web/img/image1.jpg" alt="Beyond Disabilities"/></div></div></div>
+    <div class="slide"><div class="slide-inner"><div class="slide-text"><h1>Individualized Curriculum</h1><p>Focuses on adaptive skills, functional academics, and social skills tailored to each child's unique journey.</p><div class="slide-btns"><a href="#services" class="btn-primary">Our Services</a><a href="#about" class="btn-outline">Learn More</a></div></div><div class="slide-img"><img src="https://gowtham0377.github.io/LJ-mothers-web/img/image2.png" alt="Individualized Curriculum"/></div></div></div>
+    <div class="slide"><div class="slide-inner"><div class="slide-text"><h1>Every Child Can Learn</h1><p>We believe in the potential of every child. Our dedicated team helps them reach their fullest potential with love and care.</p><div class="slide-btns"><a href="#services" class="btn-primary">Our Services</a><a href="#about" class="btn-outline">Learn More</a></div></div><div class="slide-img"><img src="https://gowtham0377.github.io/LJ-mothers-web/img/pexels-rdne-8363052.jpg.jpeg" alt="Every Child Can Learn"/></div></div></div>
+  </div>
+  <button class="carousel-arrow left" id="prevBtn">&#8249;</button>
+  <button class="carousel-arrow right" id="nextBtn">&#8250;</button>
+  <div class="carousel-dots" id="dots">
+    <div class="dot active" data-i="0"></div><div class="dot" data-i="1"></div><div class="dot" data-i="2"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal from-left">
+        <img src="https://gowtham0377.github.io/LJ-mothers-web/img/pexels-tara-winstead-8385742.jpg.jpeg" alt="About LJ Mothers Lap"/>
+      </div>
+      <div class="about-text">
+        <div class="section-tag reveal from-top">About Us</div>
+        <h2 class="section-title reveal">Welcome to LJ Mothers Lap — Special School for Unique Minds</h2>
+        <p class="reveal">LJ Mothers Lap is a dedicated special education center in Salem committed to empowering children with developmental challenges like Autism, ADHD, Intellectual Disability and Learning Disability.</p>
+        <p class="reveal">Our mission is to help every child reach their full potential through personalized care, therapy support, and inclusive learning.</p>
+        <div class="about-quote reveal">"Every child is special. Every child can learn."</div>
+        <h4 class="reveal" style="font-size:16px;font-weight:800;margin-bottom:14px;color:var(--dark-green);">Who We Support</h4>
+        <ul class="who-list stagger">
+          <li>Autism Spectrum (ASD)</li><li>ADHD</li><li>Intellectual Disability</li>
+          <li>Speech Delay</li><li>Learning Disabilities</li><li>Behavioral Challenges</li>
+        </ul>
+        <div class="about-mission-box reveal">
+          <p>Through personalized education plans, certified therapists, and a loving environment, we spread kindness and support to every child and family.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="care-grid reveal scale-in">
+      <div class="care-label-box">
+        <h2>Our Care<br/>&amp; Support</h2>
+        <p>We provide compassionate care and personalized support to help every child grow with confidence.</p>
+      </div>
+
+      <div class="care-services-grid stagger">
+          <div class="care-card">
+          <div class="care-icon"><i class="fas fa-book-open"></i></div>
+          <h4>Special Education</h4>
+          <p>Personalized learning plans tailored to each child's unique needs, fostering academic growth at their own pace.</p>
+          <div class="care-extra">Our special educators work one-on-one and in small groups using multi-sensory teaching methods. IEP goals are tracked regularly and shared with families to ensure consistent progress at home and school.</div>
+          <a href="javascript:void(0)" class="read-more" onclick="toggleCard(this)">Read More &#8594;</a>
+        </div>
+
+<div class="care-card">
+          <div class="care-icon"><i class="fas fa-cake-candles"></i></div>
+          <h4>Event Celebrations</h4>
+          <p>Birthdays, festivals and special occasions celebrated together — creating joyful memories for every child.</p>
+          <div class="care-extra">We celebrate every child's birthday, along with festivals like Pongal, Diwali, Christmas and Children's Day. These celebrations build a sense of belonging, joy and community — making every child feel truly special and valued.</div>
+          <a href="javascript:void(0)" class="read-more" onclick="toggleCard(this)">Read More &#8594;</a>
+        </div>
+
+        <div class="care-card">
+          <div class="care-icon"><i class="fas fa-dumbbell"></i></div>
+          <h4>Gym & Fitness</h4>
+          <p>Fun physical activities and exercises designed to build strength, coordination and healthy habits in children.</p>
+          <div class="care-extra">Our gym sessions are specially adapted for children of all abilities. Activities include balance training, obstacle courses and group sports that improve gross motor skills while keeping children active and happy.</div>
+          <a href="javascript:void(0)" class="read-more" onclick="toggleCard(this)">Read More &#8594;</a>
+        </div>
+
+         <div class="care-card">
+          <div class="care-icon"><i class="fas fa-eye"></i></div>
+          <h4>Visual Learning</h4>
+          <p>Interactive visual aids and tools that help children absorb and retain concepts through sight-based techniques.</p>
+          <div class="care-extra">We use picture cards, visual schedules, color-coded materials and digital boards to support children who learn best through images. This approach is especially effective for non-verbal and early communication learners.</div>
+          <a href="javascript:void(0)" class="read-more" onclick="toggleCard(this)">Read More &#8594;</a>
+        </div>
+
+       <div class="care-card">
+          <div class="care-icon"><i class="fas fa-music"></i></div>
+          <h4>Dance</h4>
+          <p>Creative dance sessions that boost confidence, rhythm and self-expression in a joyful group environment.</p>
+          <div class="care-extra">Dance therapy helps children develop body awareness, improve coordination and express emotions non-verbally. Sessions include classical, folk and freestyle dance adapted to each child's comfort level and physical ability.</div>
+          <a href="javascript:void(0)" class="read-more" onclick="toggleCard(this)">Read More &#8594;</a>
+        </div>
 
 
-    <!-- About Start -->
-     <div class="arrange">
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.2s">
-                    <div class="about-img">
-                        <img class="img-fluid w-100" src="img/pexels-rdne-8363052.jpg.jpeg" alt="Image">
-                    </div>
-                </div>
+       <div class="care-card">
+          <div class="care-icon"><i class="fas fa-shield-alt"></i></div>
+          <h4>Silambam</h4>
+          <p>Traditional Tamil martial art training that builds discipline, focus and physical agility in young learners.</p>
+          <div class="care-extra">Silambam is a centuries-old Tamil martial art using bamboo sticks. Our trained instructors teach children in a safe, structured way that builds concentration, self-discipline, hand-eye coordination and cultural pride.</div>
+          <a href="javascript:void(0)" class="read-more" onclick="toggleCard(this)">Read More &#8594;</a>
+        </div>
 
-                <div class="col-lg-10">
-                    <p class="section-title bg-white text-start text-primary pe-3">About Us</p>
-                    <h1 class="display-6 mb-4 wow fadeIn" data-wow-delay="0.2s">Welcome to Lj Mothers Lap - Special School for unique Minds</h1>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s">Lj Mothers Lap is a dedicated special education center in salem committed to empoweroing children with developmental challenges like Autism,ADHD,intellectual Disability and learning Disability.<br> <br> our mission is to help every child reach their full potential through personalized care,therapy support, and inclusive learning.<br><br></p>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s">We believe:<br><b>"Every child is special. Every child can learn"</b></p>
-                    
-                    <h1 class="display-6 mb-4 wow fadeIn" data-wow-delay="0.2s">Who We Support</h1>
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.2s">
-                    <div class="about-img">
-                        <img class="img-fluid w-100" src="img/pexels-tara-winstead-8385742.jpg.jpeg" alt="Image">
-                    </div>
-                </div>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s">We provide support for children with:<br></p>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Autism Spectrum Disored(ASD)</p>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>ADHD</p>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Intellectual Disability</p>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Speech Delay</p>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Learing Disabilities(Dyslexia,Dysgraphia)</p>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-check text-primary me-2"></i>Behavioral Challenges</p>
-                    <h1 class="display-6 mb-4 wow fadeIn" data-wow-delay="0.2s">our Facilities</h1>
-                    <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle" aria-hidden="true"></i>Safe & child friendly classrooms</p>
-                     <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle" aria-hidden="true"></i>Sensory-friendly learning environment</p>
-                      <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle" aria-hidden="true"></i>Therapy rooms</p>
-                       <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle" aria-hidden="true"></i>CCTV monitored campus</p>
-                        <p class="mb-4 wow fadeIn" data-wow-delay="0.3s"><i class="fa fa-circle" aria-hidden="true"></i>Trained special educators</p>
+
+         <div class="care-card">
+          <div class="care-icon"><i class="fas fa-pencil-alt"></i></div>
+          <h4>Drawing</h4>
+          <p>Art sessions that nurture creativity and fine motor skills, allowing children to express themselves freely.</p>
+          <div class="care-extra">Drawing and art therapy give children a powerful outlet for emotions and ideas. Sessions cover sketching, colouring, craft and painting — all designed to strengthen fine motor control and boost creative thinking.</div>
+          <a href="javascript:void(0)" class="read-more" onclick="toggleCard(this)">Read More &#8594;</a>
+        </div>
+
+
+  <div class="care-card">
+          <div class="care-icon"><i class="fas fa-bus"></i></div>
+          <h4>Monthly Trip</h4>
+          <p>Exciting educational outings every month to parks, museums and nature spots — learning beyond the classroom.</p>
+          <div class="care-extra">Every month we organise a supervised outing to places like nature parks, zoos, science museums and cultural landmarks. These trips build social skills, curiosity and real-world learning experiences children remember forever.</div>
+          <a href="javascript:void(0)" class="read-more" onclick="toggleCard(this)">Read More &#8594;</a>
+        </div>
+
         
-                    <div class="row g-4 pt-2">
-                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.4s">
-                            <div class="h-100">
-                                <h3>Why Parents Trust Us </h3>
-                                <p>We give Special care and attention to every child.We help them learn,grow,and feel confident.</p>
-                                <p class="text-dark "><i class="fa fa-check text-primary me-2"></i>Certified Special Educators</p>
-                                <p class="text-dark "><i class="fa fa-check text-primary me-2"></i>Individual Attention</p>
-                                <p class="text-dark "><i class="fa fa-check text-primary me-2"></i>parent counseling & guidance</p>
-                                <p class="text-dark "><i class="fa fa-check text-primary me-2"></i>Regular Process Reports</p>
-                                <p class="text-dark "><i class="fa fa-check text-primary me-2"></i>Affordable Fee Structure</p>
-                                <p class="text-dark "><i class="fa fa-check text-primary me-2"></i>loving & Supportive Environment</p>
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
+<div class="care-card">
+          <div class="care-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+          <h4>School Syllabus</h4>
+          <p>Curriculum-aligned academic support helping children keep pace with school subjects through guided learning.</p>
+          <div class="care-extra">We follow the Tamil Nadu state board and CBSE syllabus to support children in Maths, Science, English and Tamil. Our educators simplify concepts using adaptive methods so every child can understand and keep up with their class.</div>
+          <a href="javascript:void(0)" class="read-more" onclick="toggleCard(this)">Read More &#8594;</a>
         </div>
+
+
+
+      </div>
     </div>
-     </div>
-    <!-- About End -->
+  </div>
+</section>
 
-
-   
-
-
-    <!-- Team Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="text-center mx-auto wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">Our Team</p>
-                <h1 class="display-6 mb-4">Meet Our Dedicated Team Members</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="team-item d-flex h-100 p-4">
-                        <div class="team-detail pe-4">
-                            <img class="img-fluid mb-4" src="" alt="">
-                            <h3>sonu kumari</h3>
-                            <span>Founder & CEO</span>
-                        </div>
-                        <div class="team-social bg-light d-flex flex-column justify-content-center flex-shrink-0 p-4">
-                            <a class="btn btn-square btn-primary my-2" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary my-2" href=""><i class="fab fa-x-twitter"></i></a>
-                            <a class="btn btn-square btn-primary my-2" href=""><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-square btn-primary my-2" href=""><i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="team-item d-flex h-100 p-4">
-                        <div class="team-detail pe-4">
-                            <img class="img-fluid mb-4" src="" alt="">
-                            <h3>RANAPRADAP</h3>
-                            <span>co-Founder</span>
-                        </div>
-                        <div class="team-social bg-light d-flex flex-column justify-content-center flex-shrink-0 p-4">
-                            <a class="btn btn-square btn-primary my-2" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary my-2" href=""><i class="fab fa-x-twitter"></i></a>
-                            <a class="btn btn-square btn-primary my-2" href=""><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-square btn-primary my-2" href=""><i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- WHY US -->
+<section id="whyus">
+  <div class="container">
+    <div class="whyus-grid">
+      <div class="stats-grid stagger">
+        <div class="stat-box"><div class="stat-icon"><i class="fas fa-user-graduate"></i></div><div class="stat-number" data-count="25">0</div><div class="stat-label">Students Supported</div></div>
+        <div class="stat-box"><div class="stat-icon"><i class="fas fa-award"></i></div><div class="stat-number" data-count="1">0</div><div class="stat-label">Awards Won</div></div>
+        <div class="stat-box"><div class="stat-icon"><i class="fas fa-tasks"></i></div><div class="stat-number" data-count="9">0</div><div class="stat-label">Team Members</div></div>
+        <div class="stat-box"><div class="stat-icon"><i class="fas fa-smile"></i></div><div class="stat-number" data-count="100">0</div><div class="stat-label">Happy Families</div></div>
+      </div>
+      <div class="whyus-text">
+        <div class="section-tag reveal from-right">Why Us</div>
+        <h2 class="section-title reveal from-right">Few Reasons Why Parents Choose Us!</h2>
+        <p class="reveal from-right">We believe in creating opportunities and empowering every child through education, personalized therapy, and a supportive, loving environment.</p>
+        <ul class="whyus-list stagger">
+          <li>Certified Special Educators with proven expertise</li>
+          <li>Individual attention for every child's unique needs</li>
+          <li>Regular progress reports shared with parents</li>
+          <li>Affordable fee structure &amp; loving environment</li>
+          <li>CCTV monitored, safe &amp; child-friendly campus</li>
+        </ul>
+        <div class="whyus-btns reveal"><a href="#services" class="btn-primary">Our Services</a><a href="#about" class="btn-outline">About Us</a></div>
+      </div>
     </div>
-    <!-- Team End -->
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="team-header">
+      <div class="section-tag reveal from-top" style="justify-content:center;">Our Team</div>
+      <h2 class="section-title reveal" style="text-align:center;">Meet Our Dedicated Team Members</h2>
+    </div>
+    <div class="team-grid stagger">
+      <div class="team-card"><div class="team-img"><i class="fas fa-user-circle"></i></div><div class="team-info"><h4>Sonu Kumari</h4><span>Founder &amp; CEO</span><div class="team-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div></div>
+      <div class="team-card"><div class="team-img"><i class="fas fa-user-circle"></i></div><div class="team-info"><h4>Ranapradap</h4><span>Co-Founder</span><div class="team-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="container">
+    <h2 class="reveal">Subscribe the Newsletter</h2>
+    <p class="reveal">Don't worry, we won't spam you with emails.</p>
+    <div class="newsletter-form reveal scale-in"><input type="email" placeholder="Enter Your Email"/><button type="button"><i class="fas fa-paper-plane"></i></button></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid stagger">
+      <div class="footer-col">
+        <h5>Location</h5>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Located in Salem</span></div>
+        <div class="footer-contact-item"><i class="fas fa-home"></i><span>Sambandar Street, Fairlands, Sinthampalayam, Salem - 636016, Tamil Nadu</span></div>
+        <div class="footer-contact-item"><i class="fas fa-phone"></i><span>+012 345 67890</span></div>
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>info@ljmothers.com</span></div>
+        <div class="footer-socials"><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+      </div>
+      <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="#about">&#8250; About Us</a></li><li><a href="contact.html">&#8250; Contact Us</a></li><li><a href="#services">&#8250; Our Services</a></li><li><a href="#team">&#8250; Our Team</a></li><li><a href="#whyus">&#8250; Why Choose Us</a></li></ul></div>
+      <div class="footer-col"><h5>School Hours</h5><ul class="footer-hours"><li><div class="day">Monday – Friday</div><div class="time">09:30 am – 04:00 pm</div></li><li style="margin-top:10px;"><div class="day">Saturday</div><div class="time">09:30 am – 03:00 pm</div></li><li style="margin-top:10px;"><div class="day">Sunday</div><div class="time" style="color:#e57373;">Assessment only Available</div></li></ul></div>
+      <div class="footer-col"><h5>Gallery</h5><div class="footer-gallery"><img src="https://gowtham0377.github.io/LJ-mothers-web/img/gallery-1.jpg" alt=""/><img src="https://gowtham0377.github.io/LJ-mothers-web/img/gallery-2.jpg" alt=""/><img src="https://gowtham0377.github.io/LJ-mothers-web/img/gallery-3.jpg" alt=""/><img src="https://gowtham0377.github.io/LJ-mothers-web/img/gallery-4.jpg" alt=""/><img src="https://gowtham0377.github.io/LJ-mothers-web/img/gallery-5.jpg" alt=""/><img src="https://gowtham0377.github.io/LJ-mothers-web/img/gallery-6.jpg" alt=""/></div></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© LJ Mothers Lap, All Rights Reserved.</span><span>Designed By Tony</span></div>
+</footer>
+
+<a id="backTop" href="#home">&#8679;</a>
+
+<script>
+  /* Carousel */
+  let cur=0;const slidesEl=document.getElementById('slides');const dots=document.querySelectorAll('.dot');const total=3;let timer=setInterval(next,4500);
+  function goTo(n){cur=(n+total)%total;slidesEl.style.transform=`translateX(-${cur*100}%)`;dots.forEach((d,i)=>d.classList.toggle('active',i===cur));}
+  function next(){goTo(cur+1);}function prev(){goTo(cur-1);}
+  document.getElementById('nextBtn').onclick=()=>{clearInterval(timer);next();timer=setInterval(next,4500);};
+  document.getElementById('prevBtn').onclick=()=>{clearInterval(timer);prev();timer=setInterval(next,4500);};
+  dots.forEach(d=>d.addEventListener('click',()=>{clearInterval(timer);goTo(+d.dataset.i);timer=setInterval(next,4500);}));
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
+
+  /* Scroll reveal + active nav + back-to-top */
+  function checkReveal(){document.querySelectorAll('.reveal,.stagger').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-70)el.classList.add('visible');});}
+  const navSections=['home','about','services','whyus','team','contact'];
+  window.addEventListener('scroll',()=>{
+    document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+    let c='';navSections.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-90)c=id;});
+    document.querySelectorAll('.nav-links a').forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+c)a.classList.add('active');if((c==='whyus'||c==='team')&&a.getAttribute('href')==='#services')a.classList.add('active');});
+    document.getElementById('backTop').classList.toggle('show',window.scrollY>400);
+    checkReveal();
+  });
+  checkReveal();
+
+  /* Animated counters */
+  let counted=false;
+  new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!counted){counted=true;document.querySelectorAll('.stat-number[data-count]').forEach(el=>{const t=+el.dataset.count;let s=0;const step=t/60;const tick=setInterval(()=>{s=Math.min(s+step,t);el.textContent=Math.floor(s)+(t>10?'+':'');if(s>=t)clearInterval(tick);},20);});}},{threshold:.3}).observe(document.getElementById('whyus'));
+
+   function toggleCard(el) {
+  const card = el.closest('.care-card');
+  card.classList.toggle('expanded');
+  el.innerHTML = card.classList.contains('expanded')
+    ? 'Read Less &#8592;'
+    : 'Read More &#8594;';
+}
+</script>
+</body>
+    </html>
+
+
 
 
     
-    <!-- Testimonial End -->
-
-
-    <!-- Newsletter Start -->
-    <div class="container-fluid bg-primary py-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7 text-center wow fadeIn" data-wow-delay="0.5s">
-                    <h1 class="display-6 mb-4">Subscribe the Newsletter</h1>
-                    <div class="position-relative w-100 mb-2">
-                        <input class="form-control border-0 w-100 ps-4 pe-5" type="text"
-                            placeholder="Enter Your Email" style="height: 60px;">
-                        <button type="button" class="btn btn-lg-square shadow-none position-absolute top-0 end-0 mt-2 me-2"><i
-                                class="fa fa-paper-plane text-primary fs-4"></i></button>
-                    </div>
-                    <p class="mb-0">Don't worry, we won't spam you with emails.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Newsletter End -->
-
-
-    <!-- Footer Start -->
-    <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="row g-5 py-5">
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Location</h4>
-                     <p class="mb-2"><i class="bi bi-geo-fill"></i></i>Loacted in salem</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>1Sambandarstreet, Fairlands, Sinthampalayam, Salem-636016, Tamil Nadu</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f666169604f6a776e627f636a216c6062">[email&#160;protected]</a></p>
-                    <div class="d-flex pt-3">
-                        <a class="btn btn-square btn-primary me-2" href=""><i class="fab fa-x-twitter"></i></a>
-                        <a class="btn btn-square btn-primary me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-primary me-2" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-primary me-2" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Quick Links</h4>
-                    <a class="btn btn-link" href="about.html">About Us</a>
-                    <a class="btn btn-link" href="contact.html">Contact Us</a>
-                    <a class="btn btn-link" href="feature.html">Our Services</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">School Hours</h4>
-                    <p class="mb-1">Monday - Friday</p>
-                    <h6 class="text-light">09:00 am - 04:30 pm</h6>
-                    <p class="mb-1">Saturday</p>
-                    <h6 class="text-light">09:00 am - 2:00 pm</h6>
-                    <p class="mb-1">Sunday</p>
-                    <h6 class="text-light">Closed</h6>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Gallery</h4>
-                    <div class="row g-2">
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-1.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-2.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-3.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-4.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-5.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid w-100" src="img/gallery-6.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright pt-5">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="fw-semi-bold" href="#">Your Site Name</a>, All Right Reserved.
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <!--/*** The author’s attribution link must remain intact in the template. ***/-->
-                        <!--/*** If you wish to remove this credit link, please purchase the Pro Version . ***/-->
-                        Designed By <a class="fw-semi-bold" href="#">Tony</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
-
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
-   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-</body>
+</html>
